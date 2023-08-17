@@ -1,0 +1,90 @@
+{% load static %}
+
+<html>
+<head>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            opacity: 0.1; /* Adjust the opacity as needed */
+            pointer-events: none; /* Allows clicking through the watermark */
+        }
+        .center-content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Move content slightly up */
+            height: 100vh; /* Make the container take up the full viewport height */
+            text-align: center; /* Center-align the text inside the container */
+        }
+    </style>
+    {% block head %}
+        <title>Base</title>
+    {% endblock %}
+</head>
+<body>
+<div class="watermark">
+  <img src="{% static '/images/water.jpg' %}" alt="Watermark">
+</div>
+<br>
+<div class="container">
+    {#    <nav class="navbar navbar-default">#}
+    {#    <nav class="navbar navbar-dark bg-primary">#}
+    <nav class="navbar navbar-light" style="background-color: rgba(14,232,76,0.4);">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Home</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'inventory_management:inventory_list' %}">Inventory List</a></li>
+                        <li><a href="{% url 'inventory_management:add_inventory' %}">Add A New Inventory</a></li>
+                        <li><a href="{% url 'inventory_management:inventory_list' 1 %}">pending inventory list</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_superuser %}
+                            <li><a href="/admin/">Admin</a></li>
+                        {% endif %}
+
+                        <li><a href="{% url 'inventory_management:logout' %}">Log out</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'inventory_management:login' %}">Login Here</a></li>
+                        <li><a href="{% url 'inventory_management:register' %}">Register</a>
+                        </li>
+                    </ul>
+                {% endif %}
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+</div>
+{% block body %}
+   <div class="center-content">
+        <h1>Welcome To The Inventory Project</h1>
+    </div>
+{% endblock %}
+</body>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</html>

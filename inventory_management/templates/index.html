@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Management</title>
+</head>
+<body>
+    <h1>Inventory Management</h1>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+             <a href="/register"><input type="button" value="Create New User"></a>
+             <a href="/login"><input type="button" value="already a user"></a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Profile Inventory</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Edit This Profile Inventory</h2>
+        <form method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <h2>cds</h2>
+            <button type="submit">update</button>
+
+        </form>
+    </div>
+{% endblock %}

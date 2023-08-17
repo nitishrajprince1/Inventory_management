@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Inventory List</title>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>PRODUCT INFORMATION</h1>
+        {% csrf_token %}
+        <h3>Product Name: {{ inventory.product_name }}</h3>
+        <h3>Vendor Name: {{ inventory.vendor }}</h3>
+        <h3>MRP: {{ inventory.mrp }}</h3>
+        <h3>Batch Num: {{ inventory.batch_num }}</h3>
+        <h3>Batch Date: {{ inventory.batch_date }}</h3>
+        <h3>Quantity: {{ inventory.quantity }}</h3>
+        <h3>Status: {{ inventory.status }}</h3>
+
+        <h4><a href="/add_inventory"><input type="button" value="add new inventory"></a>
+       <a href="{% url 'inventory_management:delete_inventory' inventory.product_id %}"><input type="button" value="delete This inventory"></a>
+        <a href="{% url 'inventory_management:update_inventory' inventory.product_id %}">
+            <input type="button" value="update this inventory"></a>
+        </h4>
+
+
+    </div>
+{% endblock %}
+
+
+
